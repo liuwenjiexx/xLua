@@ -40,6 +40,60 @@ endif()
 set(LUA_SRC_PATH lua-${LUA_VERSION}/src)
 set(LUAJIT_SRC_PATH luajit-2.1.0b3/src)
 
+#begin lua-rapidjson
+set (RAPIDJSON_SRC lua-rapidjson/src/rapidjson.cpp
+lua-rapidjson/src/Document.cpp
+lua-rapidjson/src/Schema.cpp
+lua-rapidjson/src/values.cpp
+)
+set_property(
+   SOURCE ${RAPIDJSON_SRC}
+   APPEND
+   PROPERTY COMPILE_DEFINITIONS
+   LUA_LIB
+)
+list(APPEND THIRDPART_INC  lua-rapidjson/include)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${RAPIDJSON_SRC})
+#end lua-rapidjson
+
+#begin lua-protobuf
+set (PROTOBUF_SRC lua-protobuf/src/pb.c
+)
+set_property(
+     SOURCE ${PROTOBUF_SRC}
+     APPEND
+     PROPERTY COMPILE_DEFINITIONS
+     LUA_LIB
+)
+list(APPEND THIRDPART_INC  lua-protobuf/include)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${PROTOBUF_SRC})
+#end lua-protobuf
+
+#begin lua-pbc
+# set (PBC_SRC lua-pbc/src/alloc.c
+# lua-pbc/src/array.c
+# lua-pbc/src/bootstrap.c
+# lua-pbc/src/context.c
+# lua-pbc/src/decode.c
+# lua-pbc/src/map.c
+# lua-pbc/src/pattern.c
+# lua-pbc/src/proto.c
+# lua-pbc/src/register.c
+# lua-pbc/src/rmessage.c
+# lua-pbc/src/stringpool.c
+# lua-pbc/src/varint.c
+# lua-pbc/src/wmessage.c
+# )
+# set_property(
+#      SOURCE ${PBC_SRC}
+#      APPEND
+#      PROPERTY COMPILE_DEFINITIONS
+#      LUA_LIB
+# )
+# list(APPEND THIRDPART_INC  lua-pbc)
+# set (THIRDPART_SRC ${THIRDPART_SRC} ${PBC_SRC})
+#end lua-pbc
+
 if (USING_LUAJIT)
 	
     if (APPLE AND NOT IOS AND NOT ANDROID)
