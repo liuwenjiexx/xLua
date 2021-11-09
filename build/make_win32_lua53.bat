@@ -1,7 +1,12 @@
-mkdir build32 & pushd build32
-cmake -G "Visual Studio 15 2017" ..
+call windows.bat
+set BUILD_PATH=build32
+if exist "%BUILD_PATH%" (
+    rmdir /q/s "%BUILD_PATH%"
+)
+mkdir "%BUILD_PATH%" & pushd "%BUILD_PATH%"
+cmake -G %VS_VERSION% -A Win32 ..
 popd
-cmake --build build32 --config Release
+cmake --build "%BUILD_PATH%" --config Release
 md plugin_lua53\Plugins\x86
-copy /Y build32\Release\xlua.dll plugin_lua53\Plugins\x86\xlua.dll
+copy /Y %BUILD_PATH%\Release\xlua.dll plugin_lua53\Plugins\x86\xlua.dll
 pause

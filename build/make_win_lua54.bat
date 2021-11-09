@@ -1,15 +1,27 @@
-mkdir build64_54 & pushd build64_54
-cmake -DLUA_VERSION=5.4.1 -G "Visual Studio 15 2017 Win64" ..
-popd
-cmake --build build64_54 --config Release
-md plugin_lua54\Plugins\x86_64
-copy /Y build64_54\Release\xlua.dll plugin_lua54\Plugins\x86_64\xlua.dll
+call windows.bat
+set BUILD_PATH=build64_54
 
-mkdir build32_54 & pushd build32_54
-cmake -DLUA_VERSION=5.4.1 -G "Visual Studio 15 2017" ..
+if exist "%BUILD_PATH%" (
+    rmdir /q/s "%BUILD_PATH%"
+)
+mkdir %BUILD_PATH% & pushd %BUILD_PATH%
+
+cmake -DLUA_VERSION=5.4.1 -G %VS_VERSION% ..
 popd
-cmake --build build32_54 --config Release
+cmake --build "%BUILD_PATH%" --config Release
+md plugin_lua54\Plugins\x86_64
+copy /Y %BUILD_PATH%\Release\xlua.dll plugin_lua54\Plugins\x86_64\xlua.dll
+
+set BUILD_PATH=build32_54
+
+if exist "%BUILD_PATH%" (
+    rmdir /q/s "%BUILD_PATH%"
+)
+mkdir %BUILD_PATH% & pushd %BUILD_PATH%
+cmake -DLUA_VERSION=5.4.1 -G %VS_VERSION% -A Win32 ..
+popd
+cmake --build %BUILD_PATH% --config Release
 md plugin_lua54\Plugins\x86
-copy /Y build32_54\Release\xlua.dll plugin_lua54\Plugins\x86\xlua.dll
+copy /Y %BUILD_PATH%\Release\xlua.dll plugin_lua54\Plugins\x86\xlua.dll
 
 pause

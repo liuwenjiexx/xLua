@@ -5,7 +5,7 @@ set LUA_VERSION=%2
 set ANDROID_NDK=X:\bin\Android\SDK\ndk\android-ndk-r10e
 set cmake_version=3.6.4111459
 set BUILD_PATH=build/lua-%LUA_VERSION%/android/%ANDROID_ABI%
-set OUTPUT_PATH=.\output/lua-%LUA_VERSION%\android\%ANDROID_ABI%
+set OUTPUT_PATH=.\plugin_lua53/Plugins/Android/libs/%ANDROID_ABI%
 set CMAKE=%ANDROID_SDK%\cmake\%cmake_version%\bin\cmake.exe
 set NINJA=%ANDROID_SDK%\cmake\%cmake_version%\bin\ninja.exe
 
