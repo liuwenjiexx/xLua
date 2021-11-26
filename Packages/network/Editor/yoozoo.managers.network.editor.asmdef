@@ -1,0 +1,16 @@
+{
+    "name": "Yoozoo.Managers.Network.Editor",
+    "references": [
+        "Yoozoo.Managers.Network"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
