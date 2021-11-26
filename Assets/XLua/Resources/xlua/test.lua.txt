@@ -1,0 +1,43 @@
+print('Run')
+
+function bind_cb(_self, func, ...)
+  local params={...}
+   return function()
+     func(_self,table.unpack(params))
+   end
+end
+
+local o={
+  text="Hello World"
+}
+
+function o:Text(arg1)
+  if self ==nil then
+    print('self nil')
+  end
+  print('self: '.. self.text )
+  if arg1 then
+    print('arg1:'.. arg1.text)
+  else 
+    print ('arg1: nil')
+  end
+end
+
+local cb
+
+function Call(callback)
+  callback()
+end
+
+--Call( o.Text)
+
+
+--Call( bind_cb(o,o.Text) )
+
+
+
+local o2={
+  text='Argument 1'
+}
+
+Call( bind_cb(o,o.Text,o2) )

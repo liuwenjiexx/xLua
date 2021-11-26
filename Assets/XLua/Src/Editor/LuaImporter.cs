@@ -1,4 +1,4 @@
-#if UNITY_2018_1_OR_NEWER
+#if UNITY_2018_1_OR_NEWER && false
 
 using System;
 using System.Collections;

@@ -1,0 +1,7 @@
+﻿syntax = "proto3";
+package Example;
+
+message LoginRequest {
+  string userName=1;
+  string userPwd=2;
+}
