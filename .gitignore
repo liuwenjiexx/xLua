@@ -34,3 +34,4 @@ build/luajit-2.1.0b2/src/luajit.exp
 build/luajit-2.1.0b2/src/luajit.lib
 build/luac/*/build*/
 build/
+obj/
