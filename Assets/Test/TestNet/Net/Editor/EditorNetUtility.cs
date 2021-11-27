@@ -12,9 +12,9 @@ using Yoozoo.Managers.NetworkV2.Core;
 
 public static class EditorNetUtility
 {
-    public static string protoInputPath = @"Assets\Test\Resources\Proto";
+    public static string protoInputPath = @"Assets/Test/TestNet/Proto";
     public static string protoExtension = "*.proto";
-    public static string protoOutputPath = "Assets/Test/Resources/Lua/Proto";
+    public static string protoOutputPath = "Assets/Test/TestNet/Resources/Lua/Proto";
     public static string protocPath = "Tools/protoc.exe";
 
     [CSharpCallLua]
