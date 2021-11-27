@@ -251,8 +251,8 @@ MonoBehaviour:
   autoSetup: 1
   autoResendFailedPacket: 0
   m_PacketHeaderHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.DefaultPacketHeaderHelper
-  m_PacketBodyHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.DefaultPacketBodyHelper
-  m_PacketSerializerHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.CustomPacketSerializerHelper
+  m_PacketBodyHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.CustomPacketHelper
+  m_PacketSerializerHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.CustomPacketHelper
   m_HeartBeatHelperTypeKey: 
   m_ReconnectHelperTypeKey: 
 --- !u!4 &168038539
