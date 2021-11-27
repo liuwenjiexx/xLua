@@ -8,14 +8,3 @@ message Person2 {
   required string address = 4;
 }
 
-syntax = "proto2";
-package Example;
-
-message Person4 {
-  required string name = 1;
- 
-  required int32 id = 2;
-
-  optional string email = 3;
-  required string address = 4;
-}

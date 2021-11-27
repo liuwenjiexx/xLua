@@ -1,0 +1,25 @@
+
+w
+Person2.protoExample"]
+Person2
+name (	Rname
+id (Rid
+email (	Remail
+address (	Raddress
+
+Person3.protoExample"]
+Person3
+name (	Rname
+id (Rid
+email (	Remail
+address (	Raddressbproto3
+n
+CS/LoginRequest.protoExample"D
+LoginRequest
+userName (	RuserName
+userPwd (	RuserPwdbproto3
+z
+SC/LoginResponse.protoExample"O
+LoginResponse
+	errorCode (R	errorCode 
+accessToken (	RaccessTokenbproto3

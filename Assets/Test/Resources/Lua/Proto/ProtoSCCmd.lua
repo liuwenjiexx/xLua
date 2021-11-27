@@ -5,12 +5,12 @@ local p= {
 }
 return {
   id = {
-[10001] = p[1]
+[10002] = p[1]
 },
   msg = {
 ["LoginResponse"] = p[1]
 },
   msgToId = {
-["LoginResponse"] = 10001
+["LoginResponse"] = 10002
 }
 }

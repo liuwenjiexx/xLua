@@ -206,10 +206,13 @@ end
 
 
 function BaseNetChannelHandler:OnNetworkChannelReceivePacket(channel, packet)
-    if packet.rawData == nil then return end
+    local rawData=packet.rawData or  packet.message
+
+    if rawData == nil then return end
 
     local msgId = packet.Id
-    local receivedData = self.protoHelper:decode("sc", msgId, packet.rawData)
+    local receivedData = self.protoHelper:decode("sc", msgId, rawData)
+
     local callbacksArray = self._callBacks[msgId];
     if callbacksArray ~= nil then
         for i, callback in ipairs(callbacksArray) do
@@ -217,7 +220,6 @@ function BaseNetChannelHandler:OnNetworkChannelReceivePacket(channel, packet)
         end
         self._callBacks[msgId] = nil
     end
-
     self._listeners:DispatchEvent(tostring(msgId), receivedData)
 end
 

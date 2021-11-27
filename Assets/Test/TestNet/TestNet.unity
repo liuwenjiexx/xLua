@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +118,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -246,11 +248,11 @@ MonoBehaviour:
   m_IPAddress: 127.0.0.1
   m_Port: 8080
   clientTypeEnum: 0
-  autoSetup: 0
+  autoSetup: 1
   autoResendFailedPacket: 0
   m_PacketHeaderHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.DefaultPacketHeaderHelper
   m_PacketBodyHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.DefaultPacketBodyHelper
-  m_PacketSerializerHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.DefaultPacketSerializerHelper
+  m_PacketSerializerHelperTypeKey: Yoozoo.Managers.NetworkV2.Helpers.CustomPacketSerializerHelper
   m_HeartBeatHelperTypeKey: 
   m_ReconnectHelperTypeKey: 
 --- !u!4 &168038539

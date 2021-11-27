@@ -3,5 +3,5 @@ package Example;
 
 message LoginResponse {
   int32 errorCode = 1;
-  string token = 2;
+  string accessToken = 2;
 }

@@ -6,15 +6,35 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using System.IO;
 using UnityEditor;
+using System;
+using XLua;
+using Yoozoo.Managers.NetworkV2.Core;
 
-
-public class EditorProtobufLuaUtility
+public static class EditorNetUtility
 {
+    public static string protoInputPath = @"Assets\Test\Resources\Proto";
+    public static string protoExtension = "*.proto";
+    public static string protoOutputPath = "Assets/Test/Resources/Lua/Proto";
+    public static string protocPath = "Tools/protoc.exe";
 
-    [MenuItem("XLua/Build Proto")]
+    [CSharpCallLua]
+    public static List<Type> s
+    {
+        get
+        {
+            List<Type> list = new List<Type>();
+            list.AddRange(new Type[] {
+                typeof(NetDelegates.ChannelDelegates.NetworkChannelErrorHandler )
+            });
+            return list;
+        }
+    }
+
+
+    [MenuItem("Tools/Build Proto")]
     public static void BuildProto()
     {
-        BuildLuaProto(@"Assets\Test\Resources\Proto", "*.proto", "Assets/Test/Resources/Lua/Proto");
+        BuildLuaProto(protoInputPath, protoExtension, protoOutputPath);
     }
 
     public static void BuildLuaProto(string dir, string filter, string outputDir)
@@ -27,7 +47,9 @@ public class EditorProtobufLuaUtility
 
         BuildLuaProto2(Path.Combine(dir, "SC"), filter, Path.Combine(outputDir, "ProtoSCCmd.lua"));
 
-        BuildLuaProtoBytes(Path.Combine(dir, "CS") + "|" + Path.Combine(dir, "SC"), filter, Path.Combine(outputDir, "Proto.bytes"));
+        //BuildLuaProtoBytes(Path.Combine(dir, "CS") + "|" + Path.Combine(dir, "SC"), filter, Path.Combine(outputDir, "Proto.pb.bytes"));
+        BuildProtoPB(dir, filter, Path.Combine(outputDir, "Proto.pb.bytes"));
+        Debug.Log("Build proto done\n" + outputDir);
     }
 
     public static void BuildLuaProto2(string dir, string filter, string outputPath)
@@ -36,7 +58,7 @@ public class EditorProtobufLuaUtility
 
         if (Directory.Exists(dir))
         {
-            foreach (var file in Directory.GetFiles(dir, filter))
+            foreach (var file in Directory.GetFiles(dir, filter, SearchOption.AllDirectories))
             {
                 ProtoMessageInfo.Parse(File.ReadAllText(file, Encoding.UTF8), list);
             }
@@ -124,6 +146,58 @@ public class EditorProtobufLuaUtility
         File.WriteAllText(outputPath, sb.ToString(), encoding);
     }
 
+    public static void BuildProtoPB(string dir, string filter, string outputPath)
+    {
+        StringBuilder cmdText = new StringBuilder();
+        cmdText.Append("-o \"")
+            .Append(Path.GetFullPath(outputPath))
+            .Append("\"");
+
+        if (Directory.Exists(dir))
+        {
+            string fullDir = Path.GetFullPath(dir);
+            int index;
+            if (dir.EndsWith("\\") || dir.EndsWith("/"))
+                index = dir.Length;
+            else
+                index = dir.Length + 1;
+            foreach (var file in Directory.GetFiles(dir, filter, SearchOption.AllDirectories))
+            {
+                cmdText.Append(" \"")
+                   .Append(file.Substring(index))
+                    .Append("\"");
+            }
+        }
+        using (var proc = new System.Diagnostics.Process())
+        {
+            proc.StartInfo = new System.Diagnostics.ProcessStartInfo()
+            {
+                WorkingDirectory = dir,
+                FileName = Path.GetFullPath(protocPath),
+                Arguments = cmdText.ToString(),
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true,
+            };
+            StringBuilder error = new StringBuilder();
+            proc.OutputDataReceived += (o, e) =>
+            {
+                error.AppendLine(e.Data);
+            };
+            proc.ErrorDataReceived += (o, e) =>
+            {
+                error.AppendLine(e.Data);
+            };
+
+            proc.Start();
+            proc.WaitForExit();
+            if (error.Length > 0)
+            {
+                throw new Exception(error.ToString());
+            }
+        }
+    }
     public static void BuildLuaProtoBytes(string dirs, string filter, string outputPath)
     {
         StringBuilder sb = new StringBuilder();
@@ -171,9 +245,9 @@ public class EditorProtobufLuaUtility
                 }
             }
         }
-       Encoding encoding = new UTF8Encoding(false);
+        Encoding encoding = new UTF8Encoding(false);
         File.WriteAllText(outputPath, sb.ToString(), encoding);
-    } 
+    }
 
 
     class ProtoMessageInfo
