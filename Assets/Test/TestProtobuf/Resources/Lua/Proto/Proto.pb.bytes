@@ -1,0 +1,11 @@
+
+n
+CS/LoginRequest.protoExample"D
+LoginRequest
+userName (	RuserName
+userPwd (	RuserPwdbproto3
+z
+SC/LoginResponse.protoExample"O
+LoginResponse
+	errorCode (R	errorCode 
+accessToken (	RaccessTokenbproto3

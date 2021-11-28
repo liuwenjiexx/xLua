@@ -16,7 +16,6 @@ local __G_ERROR_TRACK = __G_ERROR_TRACK
 
 local decode = function(typename, buffer)
     if nil ~= buffer then
-        print("decode:"..typename)
         local ret = __decode(typename, buffer);
         if false == ret then
             print(string.format("<color = #FF0000>%s</color>",err.."\t"..typename));

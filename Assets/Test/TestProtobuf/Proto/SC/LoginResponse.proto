@@ -1,0 +1,7 @@
+syntax = "proto3";
+package Example;
+
+message LoginResponse {
+  int32 errorCode = 1;
+  string accessToken = 2;
+}
