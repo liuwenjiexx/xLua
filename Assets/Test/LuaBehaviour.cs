@@ -6,7 +6,7 @@ using XLua;
 
 public class LuaBehaviour : MonoBehaviour
 {
-    protected LuaEnv luaEnv = new LuaEnv();
+    public LuaEnv luaEnv = new LuaEnv();
 
     public string mainLua;
 
