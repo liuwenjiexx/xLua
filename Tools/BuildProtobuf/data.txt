@@ -1,0 +1,3 @@
+﻿Example.LoginRequest=10001
+Example.LoginResponse=10002
+
