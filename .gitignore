@@ -35,3 +35,11 @@ build/luajit-2.1.0b2/src/luajit.lib
 build/luac/*/build*/
 build/
 obj/
+/BuildProtobuf/bin
+/.vsconfig
+/Assets/Plugins/WSA/ARM64.meta
+/Assets/Plugins/WSA/ARM64/xlua.dll.meta
+/Logs/Packages-Update.log
+/Packages/manifest.json
+/Packages/packages-lock.json
+/UserSettings/EditorUserSettings.asset
