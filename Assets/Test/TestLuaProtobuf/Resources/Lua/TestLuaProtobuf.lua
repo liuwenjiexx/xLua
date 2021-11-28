@@ -2,10 +2,13 @@ Proto = require("protobuf/LuaProtoBuf")
 local pbdata
 
 print('Proto:initialize')
+local proto=require("Proto/Proto")
 Proto:initialize({
     bytes = CS.UnityEngine.Resources.Load("Lua/Proto/Proto.pb", typeof(CS.UnityEngine.TextAsset)).bytes,
-    CSCmd = require("Proto/ProtoCSCmd"),
-    SCCmd = require("Proto/ProtoSCCmd")
+    CSCmd=proto.cs,
+    SCCmd=proto.sc,
+    --CSCmd = require("Proto/ProtoCSCmd"),
+    --SCCmd = require("Proto/ProtoSCCmd")
 })
 
 

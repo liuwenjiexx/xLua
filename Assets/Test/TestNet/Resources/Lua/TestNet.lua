@@ -2,11 +2,13 @@ print("hello TestNet")
 NetMgr = require 'Net/NetMgr'
 
 Proto = require("protobuf/LuaProtoBuf")
-
+local protodata=require("Proto/Proto")
 Proto:initialize({
     bytes =CS.UnityEngine.Resources.Load("Lua/Proto/Proto.pb", typeof(CS.UnityEngine.TextAsset)).bytes,
-    CSCmd = require("Proto/ProtoCSCmd"),
-    SCCmd = require("Proto/ProtoSCCmd")
+    CSCmd=protodata.cs,
+    SCCmd=protodata.sc,
+    -- CSCmd = require("Proto/ProtoCSCmd"),
+    -- SCCmd = require("Proto/ProtoSCCmd")
 })
 
 NetMgr:initialize(Proto)
